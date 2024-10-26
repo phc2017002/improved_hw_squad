@@ -9,17 +9,19 @@ logging.basicConfig(level=logging.INFO)
 transformers_logger = logging.getLogger("transformers")
 transformers_logger.setLevel(logging.WARNING)
 
+# training parameters; given below is the default setting used for bert large models
+#for BERT large you need at least 4 GPUS with 11 GB of GPU momory
+# for bert base models one GPU is sufficient for a batch size of 32
+# make lr higher if you train with larger batch size
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
-
-model_args = {"train_batch_size": 16, 
+model_args = {"train_batch_size": 4, 
 "n_gpu":3, "eval_batch_size": 64, 
 'max_answer_length': 50,  
 'num_train_epochs': 6, 
-'output_dir': "./output_multi_lingual_english_1_ocr_sorted/", 'best_model_dir': 
-'./output_multi_lingual_english_1_ocr_sorted/output_best_hindi_ocr_sorted/', 'evaluate_during_training': 
+'output_dir': "./output/", 'best_model_dir': 
+'./output/best_model_bert_bs_8_for_bentham/', 'evaluate_during_training': 
 True, 'fp16': False, 'overwrite_output_dir':True,
-'use_cached_eval_features':True, 
+'use_cached_eval_features':False, 
 'save_eval_checkpoints': False, 
 'save_model_every_epoch': False, 
 'max_seq_length': 384, 
@@ -44,30 +46,33 @@ True, 'fp16': False, 'overwrite_output_dir':True,
 
 
 
-# if you want to fine tune a model locally saved or say you want to continue training a model previously saved give location of the dir where the model is
-#model = QuestionAnsweringModel('bert', './models/bert-large-squad-docvqa-finetuned/', args=model_args)
+
+model = QuestionAnsweringModel('bert', 'bert-large-uncased-whole-word-masking-finetuned-squad', args=model_args)
+
+#print (model.args)
+#import pdb; pdb.set_trace()
 
 
-# if you want to fine tune a pretrained model from pytorch trasnformers model zoo (https://huggingface.co/transformers/pretrained_models.html), you can directly give the model name ..the pretrained model will be downloadef first to a cache dir 
-# here the model we are fine tuning is bert-large-cased-whole-word-masking-finetuned-squad
-#model = QuestionAnsweringModel('bert', 'bert-base-multilingual-uncased', args=model_args)
 
-model = QuestionAnsweringModel('bert', 'bert-base-multilingual-uncased', args=model_args)
-
-print (model.args)
-
-with open('./sorted_mlqa_ocr_hindi_new_train_data.json') as f:
-    train_data = json.load(f)
-
-with open('./sorted_mlqa_ocr_hindi_new_val_data.json') as f:
-    dev_data = json.load(f)
+#with open('./SQuAD_like_HW-SQuAD_train_new_tf_idf_with_transformer_modified.json') as f:
+#  train_data = json.load(f)
 
 
-model.train_model(train_data, show_running_loss= False, eval_data=dev_data)
-#dev_data, test_data = train_test_split(dev_data, test_size=0.66, random_state=42)
+#print('length of test data------', len(train_data))
+#train_data, temp_data = train_test_split(data_list, test_size=0.2, random_state=42)
+
+#dev_data, test_data = train_test_split(temp_data, test_size=0.5, random_state=42)
 
 
-with open('./sorted_mlqa_ocr_english_new_test_data.json') as f:
+
+#with open('./BenthamQA_test_new_without_transformer_preprocessed.json') as f:
+#  dev_data = json.load(f)
+
+#train 
+#model.train_model(train_data, show_running_loss= True, eval_data=dev_data)
+
+
+with open('./BenthamQA_Squad_like_tf_idf_with_transformer_200_qa.json') as f:
     test_data = json.load(f)
 
 
@@ -77,7 +82,7 @@ print(result)
 #print(predictions)
 
 
-with open('./all_mlqa_ocr_test_data_english_sorted.txt','w') as f:
+with open('./BenthamQA_Squad_like_tf_idf_with_transformer_200_qa.txt','w') as f:
     f.write(str(result))
     f.write(str(predictions))
 
