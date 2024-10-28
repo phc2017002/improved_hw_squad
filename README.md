@@ -1,4 +1,4 @@
-Package Installation:
+## Package Installation:
 
 ```
 To set up the environment for this project, ensure you have the following packages installed:
@@ -8,10 +8,10 @@ Sentence Transformers: 2.6.1
 Scikit-Learn: 1.3.2
 ```
 
-Usage:
+## Usage:
 For both training and inference, use the ```train_and_test.py``` script. The necessary data is provided in a zip file formatted in SQuAD style.
 
-Citation
+## Citation
 
 If you utilize this code in your work, please cite the following paper:
 
