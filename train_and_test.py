@@ -9,10 +9,6 @@ logging.basicConfig(level=logging.INFO)
 transformers_logger = logging.getLogger("transformers")
 transformers_logger.setLevel(logging.WARNING)
 
-# training parameters; given below is the default setting used for bert large models
-#for BERT large you need at least 4 GPUS with 11 GB of GPU momory
-# for bert base models one GPU is sufficient for a batch size of 32
-# make lr higher if you train with larger batch size
 
 model_args = {"train_batch_size": 4, 
 "n_gpu":3, "eval_batch_size": 64, 
@@ -49,8 +45,7 @@ True, 'fp16': False, 'overwrite_output_dir':True,
 
 model = QuestionAnsweringModel('bert', 'bert-large-uncased-whole-word-masking-finetuned-squad', args=model_args)
 
-#print (model.args)
-#import pdb; pdb.set_trace()
+
 
 
 
