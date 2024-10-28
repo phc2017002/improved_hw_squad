@@ -12,10 +12,10 @@ Citation
 
 If you utilize this code in your work, please cite the following paper:
 
-@inproceedings{aniket_cvip,
+[@inproceedings{aniket_cvip,
   title={Advancing Question Answering on Handwritten Documents},
   author={Aniket Pal, Ajoy Mondal, and C. V. Jawahar},
   booktitle={International Conference on Computer Vision & Image Processing},
   year={2024},
   organization={Springer}
-}
+}]
