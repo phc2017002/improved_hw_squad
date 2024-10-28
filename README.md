@@ -12,12 +12,10 @@ Citation
 
 If you utilize this code in your work, please cite the following paper:
 
-@misc{pal2024advancingquestionansweringhandwritten,
-      title={Advancing Question Answering on Handwritten Documents: A State-of-the-Art Recognition-Based Model for HW-SQuAD}, 
-      author={Aniket Pal and Ajoy Mondal and C. V. Jawahar},
-      year={2024},
-      eprint={2406.17437},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV},
-      url={https://arxiv.org/abs/2406.17437}, 
+@inproceedings{aniket_cvip,
+  title={Advancing Question Answering on Handwritten Documents},
+  author={Aniket Pal, Ajoy Mondal, and C. V. Jawahar},
+  booktitle={International Conference on Computer Vision & Image Processing},
+  year={2024},
+  organization={Springer}
 }
